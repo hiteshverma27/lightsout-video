@@ -1,7 +1,6 @@
 import MockmanEs from "mockman-js";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import logo from "./logo.png";
 
 function App() {
   return (
