@@ -1,51 +1,200 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+/* *************** Orca UI ****************** */
+
+@import url("https://orcaui.netlify.app/styles/main.css");
+
+:root {
+  --accent-color: rgb(0, 221, 255);
+  --lightgrey: lightgrey;
+  --red: red;
+  --white: white;
+}
+html {
+  width: 100vw;
+}
+body {
+  overflow-x: hidden;
+  font-family: "Roboto", sans-serif;
+}
+.header-text {
+  top: 70%;
+  color: var(--white);
+}
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 500;
+}
+.shop-now-btn {
+  margin: auto;
+  align-content: center;
+  justify-content: center;
+}
+.explore-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 50vh;
+  width: 100%;
+}
+.hover-img:hover {
+  transform: scale(1.02);
+  transition: 0.2s ease-in-out;
+}
+.center-div h1 {
+  line-height: 6rem;
+}
+.catagory div {
+  outline: 2px solid var(--lightgrey);
+  height: 20rem;
+  width: 20rem;
+}
+.text-overlay {
+  background-color: var(--lightgrey);
+  font-weight: bold;
+  font-size: 150%;
+}
+.shop-now-btn:hover {
+  transform: translateX(1rem) scale(1.05);
+  transition: 0.2s ease-in-out;
+}
+footer {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+#explore-link{
+  transition: 0.2s ease-in-out;
+  color: var(--white);
+}
+a:hover {
+  transition: 0.2s ease-in-out;
+  color: var(--accent-color);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.hr-color-accent {
+  border: 1px solid var(--accent-color);
+}
+.catagory-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.text-underline {
+  text-decoration: underline;
+}
+#menu-icon {
+  display: none;
+}
+#search-mobile {
+  display: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* *********** Media queries for mobile ************* */
+
+@media screen and (max-width: 76.8em) {
+  #nav {
+    width: 100%;
+    padding: 1rem;
+  }
+  #search-bar-nav {
+    display: none;
+  }
+  #search-mobile {
+    display: block;
+  }
+  header h1 {
+    line-height: 8rem;
+  }
+  header img {
+    object-fit: none;
+    width: 100%;
+    left: 10rem;
+  }
+  .filter {
+    display: none;
+  }
+  #main-content-products {
+    width: 100vw;
+  }
+  .cart-manage-main {
+    flex-direction: column;
+  }
+  .cart-manage-main {
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+  }
+  .price-details {
+    width: 90vw;
+    margin: auto;
+  }
+  #card-horizontal {
+    width: 100vw;
+    padding: 0;
+    border: none;
   }
 }
-
-.App-header {
-  background-color: #22201c;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.cart-manage-main {
+  min-height: calc(100vh - 64px);
+  align-items: flex-start;
   justify-content: center;
-  color: white;
+}
+.price-details {
+  border: 2px solid var(--lightgrey);
+}
+.login-div {
+  align-items: center;
+  overflow-y: auto;
+  min-height: max-content;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
 }
 
-.App-link {
-  color: #61dafb;
+@media screen and (max-width: 42.5em) {
+  .login-div {
+    width: 90%;
+    height: max-content;
+  }
+}
+main {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+.filter {
+  width: 15vw;
+  top: 9vh;
+  overflow-y: auto;
+  height: 92vh;
+  border: 2px solid var(--lightgrey);
+  position: sticky;
+}
+.main-content {
+  box-sizing: border-box;
+  width: 80vw;
+  display: grid;
+  grid-gap: 2rem;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, 18rem);
+  transition: 1s ease-in-out;
+}
+.card-v:hover {
+  transform: scale(1.03);
+}
+.wishlist-main-div {
+  box-sizing: border-box;
+  width: 100vw;
+  display: grid;
+  grid-gap: 2rem;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, 18rem);
+  transition: 1s ease-in-out;
+  min-height: calc(100vh - 64px);
+}
+.wishlist-icon-red {
+  color: var(--red);
 }
 
-.brand-title {
-  font-size: 3rem;
-  color: #d9d9d9;
-}
-
-.brand-title span {
-  color: #ffde59;
-}
-
-.brand-description {
-  font-size: 1.4rem;
-}
-
-.links {
-  display: flex;
-}
-
-.links a {
-  color: #d9d9d9;
-  font-size: 1.2rem;
-  margin: 1rem;
+.badge {
+  height: 70%;
+  width: 70%;
 }
