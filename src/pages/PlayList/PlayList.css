@@ -1,0 +1,11 @@
+.playlist-container{
+    height: calc(100vh - 200px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+}
+.playlist{
+    min-width: 40%;
+    max-width: 30vw;
+}
