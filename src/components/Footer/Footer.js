@@ -9,7 +9,7 @@ function AccountLink({title, _id}) {
   return <li className="my-1" key={_id}><a href="https://github.com/">{title}</a></li>;
 }
 function Footer() {
-    return <footer className="w-100vw pb-2">
+    return <footer className="w-100vw pb-2 footer">
       <div className="mx-5 flex flex-wrap flex-space_between-center">
         <div className="mb-auto my-5 footer-links">
           <a href="https://github.com/index.html">
