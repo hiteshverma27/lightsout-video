@@ -1,0 +1,10 @@
+.sidebar-links{
+ border-radius: 5px;   
+ cursor: pointer;
+}
+.sidebar-links:hover{
+    background-color: var(--lightgrey);
+}
+.active-link{
+    background-color: var(--lightgrey);
+}

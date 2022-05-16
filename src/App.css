@@ -58,9 +58,10 @@ nav {
   transform: translateX(1rem) scale(1.05);
   transition: 0.2s ease-in-out;
 }
-footer {
+.footer {
   background-color: var(--primary-color);
   color: var(--white);
+  z-index: 10;
 }
 #explore-link{
   transition: 0.2s ease-in-out;
@@ -87,6 +88,10 @@ a:hover {
 }
 #search-mobile {
   display: none;
+}
+
+.test-border{
+  border: 1px solid black;
 }
 
 /* *********** Media queries for mobile ************* */

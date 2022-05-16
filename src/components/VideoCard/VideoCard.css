@@ -1,0 +1,21 @@
+.card-container{
+    border: 1px solid gray;
+    height: 35rem;
+    width: 35rem;
+    overflow: hidden;
+    border-radius: 1rem;
+}
+.video-card-img{
+    min-width: 100%;
+    min-height: 100%;
+    flex-shrink: 0;
+    border-radius: 1rem;
+}
+.img-container{
+    overflow: hidden;
+}
+.overflow-title{
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

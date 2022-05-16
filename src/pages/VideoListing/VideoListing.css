@@ -1,0 +1,22 @@
+.video-cards {
+    overflow-y: auto;
+}
+
+/* chips css - move later */
+.category-chips{
+    border: 1px solid gray;
+    border-radius: 2rem;
+}
+.chips-container{
+    display: flex;
+    align-items: center;
+    overflow-x: scroll;
+    width: max-content;
+    height: 8rem
+}
+.chips-container::-webkit-scrollbar{
+    display: none;
+}
+.chip-active{
+    background-color: lightgray;
+}
