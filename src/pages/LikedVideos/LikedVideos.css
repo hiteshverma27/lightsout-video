@@ -1,0 +1,42 @@
+.liked-video-card{
+    border-radius: 1rem;
+    outline: 1px solid gray;
+    max-width: 70vw;
+    min-width: 80%;
+    height: 20rem;
+}
+.liked-video-container{
+    display: flex;
+    justify-content: center;
+    overflow-x: scroll;
+    flex-wrap: wrap;
+}
+.liked-card-img{
+    
+    border-radius: 1rem;
+}
+.video-description{
+    display: block;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow: hidden;
+    max-height: 3.6em;
+    line-height: 1.8em;
+}
+.icons{
+    display: flex;
+    align-items: center;
+}
+.remove-btn{
+    height: 2rem;
+    width: 2rem;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+    border-radius: 1rem;
+}
+.remove-btn:hover{
+    background-color: lightgray;
+}

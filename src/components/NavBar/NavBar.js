@@ -1,7 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "../../contexts";
 
 function NavBar() {
+  const { isAuthenticated, userData } = useAuth();
+  const currentLocation = useLocation();
+
   return (
     <nav className="flex-space_between-center w-100per px-2 bg-white p-2 navbar">
       <Link to={"/"}>
@@ -12,15 +16,28 @@ function NavBar() {
       </Link>
 
       <ul className="flex-space_between-center navbar">
-        <li className="mx-2 flex-center-center navbar">
-          <span className="material-icons icon-s3 navbar">account_circle</span>{" "}
-          <h4 className="navbar">username</h4>
-        </li>
-        <li className="mx-2">
-          <Link to={"/login"}>
-            <button className="btn-primary-confirm">Login</button>
-          </Link>
-        </li>
+        {isAuthenticated ? (
+          <li className="mx-2 flex-center-center navbar">
+            <Link to={"/profile"} className="flex">
+              <span className="material-icons icon-s3 navbar mx-1">
+                account_circle
+              </span>{" "}
+              <h4 className="navbar">{`Hi ${userData.firstName}`}</h4>
+            </Link>
+          </li>
+        ) : (
+          <li className="mx-2">
+            {currentLocation.pathname === "/login" ? (
+              <Link to={"/signup"}>
+                <button className="btn-primary-confirm">Signup</button>
+              </Link>
+            ) : (
+              <Link to={"/login"}>
+                <button className="btn-primary-confirm">Login</button>
+              </Link>
+            )}
+          </li>
+        )}
       </ul>
     </nav>
   );
