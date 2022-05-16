@@ -7,7 +7,7 @@ function NavBar() {
       <Link to={"/"}>
         <h3 className="navbar bold flex-center-center mx-1">
           LightsOut{" "}
-          <span class="mx-1 material-icons-outlined">video_library</span>
+          <span className="mx-1 material-icons-outlined">video_library</span>
         </h3>
       </Link>
 
