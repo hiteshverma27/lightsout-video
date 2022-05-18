@@ -10,6 +10,7 @@ import {
   NotFound,
   PlayList,
   Signup,
+  SingleVideo,
   VideoListing,
   WatchLater,
 } from "./pages";
@@ -26,6 +27,7 @@ function App() {
         <Route path="/explore" element={<VideoListing />} />
         <Route path="/playlist" element={<PlayList />} />
         <Route path="/liked-videos" element={<LikedVideos />} />
+        <Route path="/video/:videoId" element={<SingleVideo />} />
         <Route path="/watch-later" element={<WatchLater />} />
         <Route path="/history" element={<History />} />
         <Route path="/profile" element={<Profile />} />

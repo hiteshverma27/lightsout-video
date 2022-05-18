@@ -4,9 +4,14 @@
     flex-wrap: wrap;
     justify-content: center;
     align-content: flex-start;
-    overflow-y: scroll;
 }
 .playlist{
     min-width: 40%;
     max-width: 30vw;
+}
+.video-player{
+    border-radius: 1rem;
+}
+.video-desc-container{
+    overflow-y: scroll;
 }

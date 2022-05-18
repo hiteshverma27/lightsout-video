@@ -22,6 +22,26 @@ function PlayList() {
           </div>
           <hr />
           <div className="h-90per w-80vw p-2 mb-1 playlist-container">
+            <div
+              className="test-border flex-space_between-center playlist h-10rem m-3"
+            >
+              <h3 className="m-2">Liked Videos</h3>
+              <Link to={"/liked-videos"}>
+                <span className="material-icons m-2 cursor-pointer">
+                  open_in_new
+                </span>
+              </Link>
+            </div>
+            <div
+              className="test-border flex-space_between-center playlist h-10rem m-3"
+            >
+              <h3 className="m-2">Watch Later</h3>
+              <Link to={"/watch-later"}>
+                <span className="material-icons m-2 cursor-pointer">
+                  open_in_new
+                </span>
+              </Link>
+            </div>
             {playlists.map(({ playListName, to }) => {
               return (
                 <div

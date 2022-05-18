@@ -1,8 +1,32 @@
 import React from "react";
-import { Footer, LikedVideoCard, NavBar, SideBar } from "../../components";
+import { Link } from "react-router-dom";
+import {
+  errorToast,
+  Footer,
+  LikedVideoCard,
+  NavBar,
+  SideBar,
+  successToast,
+} from "../../components";
+import { useAuth, useVideo } from "../../contexts";
+import axios from "axios";
 import "./LikedVideos.css";
 
 function LikedVideos() {
+  const { likedVideos, setSingleVideo, videos, setLikedVideos } = useVideo();
+  const { token } = useAuth();
+
+  const removeFromLikedVideos = async (_id) => {
+    try {
+      const likedVideos = await axios.delete(`/api/user/likes/${_id}`, {
+        headers: { authorization: token },
+      });
+      successToast("Video removed from liked videos!");
+      setLikedVideos(likedVideos.data.likes);
+    } catch (error) {
+      errorToast("Something went wrong!");
+    }
+  };
   return (
     <>
       <NavBar />
@@ -16,10 +40,46 @@ function LikedVideos() {
           </div>
           <hr />
           <div className="h-90per w-80vw p-1 liked-video-container">
-            <LikedVideoCard/>
-            <LikedVideoCard/>
-            <LikedVideoCard/>
-            <LikedVideoCard/>
+            {!likedVideos.length===0? likedVideos.map(
+              ({
+                _id,
+                title,
+                creator,
+                thumbnail,
+                views,
+                avatar,
+                duration,
+                description,
+              }) => (
+                <div
+                  key={_id}
+                  onClick={async () =>
+                    await setSingleVideo(
+                      videos.filter((item) => item._id === _id)[0]
+                    )
+                  }
+                  className="likeVideoCardContainer"
+                >
+                  <Link to={`/video/${_id}`}>
+                    <LikedVideoCard
+                      title={title}
+                      creator={creator}
+                      thumbnail={thumbnail}
+                      views={views}
+                      avatar={avatar}
+                      duration={duration}
+                      description={description}
+                    />
+                  </Link>
+                  <button
+                    className="remove-btn m-2"
+                    onClick={() => removeFromLikedVideos(_id)}
+                  >
+                    <span className="material-icons icon-s3 p-1">delete</span>
+                  </button>
+                </div>
+              )
+            ):<h2>No videos in this playlist yet. <Link to={"/explore"}>Explore</Link></h2>}
           </div>
         </div>
       </div>
