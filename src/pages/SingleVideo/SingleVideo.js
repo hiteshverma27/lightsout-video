@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import {
   errorToast,
   Footer,
@@ -119,9 +119,7 @@ function SingleVideo() {
         }
       );
     } catch (error) {
-      error.response.status === 409
-        ? successToast("Video already exist in history!")
-        : errorToast("Something went wrong while adding video to history!");
+      error.response.status === 500 && errorToast("Something went wrong while adding video to history!");
     }
   };
 
@@ -158,7 +156,7 @@ function SingleVideo() {
   
   useEffect(() => {
     isAuthenticated && setTimeout(()=>addToHistory(singleVideo),0);
-  }, [isAuthenticated, singleVideo, addToHistory]);
+  });
 
   return (
     <>

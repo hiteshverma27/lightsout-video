@@ -64,7 +64,7 @@ function History() {
         : errorToast("Something went wrong while adding video to watch later!");
     }
   };
-
+  console.log(history);
   return (
     <>
       <NavBar />
@@ -85,7 +85,7 @@ function History() {
           </div>
           <hr />
           <div className="h-90per w-80vw p-1 liked-video-container">
-            {!history.length===0? history.map(
+            {history.map(
               ({
                 _id,
                 title,
@@ -125,7 +125,7 @@ function History() {
                   </button>
                 </div>
               )
-            ):<h2>Nothing to see in here <Link to={"/explore"}>Explore</Link></h2>}
+            )}
           </div>
         </div>
       </div>
