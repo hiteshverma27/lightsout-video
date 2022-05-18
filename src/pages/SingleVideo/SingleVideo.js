@@ -82,7 +82,6 @@ function SingleVideo() {
         );
         successToast("Video added to liked videos!");
         setLikedVideos(likedVideos.data.likes);
-        console.log(likedVideos);
       } catch (error) {
         error.response.status === 409
           ? successToast("Video already exist in liked videos!")
