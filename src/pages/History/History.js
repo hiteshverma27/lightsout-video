@@ -64,7 +64,6 @@ function History() {
         : errorToast("Something went wrong while adding video to watch later!");
     }
   };
-  console.log(history);
   return (
     <>
       <NavBar />

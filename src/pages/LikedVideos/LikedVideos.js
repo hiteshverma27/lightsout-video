@@ -40,7 +40,7 @@ function LikedVideos() {
           </div>
           <hr />
           <div className="h-90per w-80vw p-1 liked-video-container">
-            {!likedVideos.length===0? likedVideos.map(
+            {likedVideos.map(
               ({
                 _id,
                 title,
@@ -79,7 +79,7 @@ function LikedVideos() {
                   </button>
                 </div>
               )
-            ):<h2>No videos in this playlist yet. <Link to={"/explore"}>Explore</Link></h2>}
+            )}
           </div>
         </div>
       </div>

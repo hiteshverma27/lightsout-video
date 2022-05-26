@@ -18,6 +18,8 @@ function SingleVideo() {
     setLikedVideos,
     likedVideos,
     watchLater,
+    playlist,
+    setPlaylist,
   } = useVideo();
   const { _id, avatar, title, creator, description, views, duration } =
     singleVideo;
@@ -25,6 +27,7 @@ function SingleVideo() {
   const navigate = useNavigate();
   const [videoIsLiked, setVideoIsLiked] = useState(false);
   const [videoInWatchLater, setVideoInWatchLater] = useState(false);
+  const [playListNameInput, setPlayListNameInput] = useState("");
 
   const watchLaterHandler = async (video) => {
     const deleteFromWatchLater = async (video) => {
@@ -118,18 +121,10 @@ function SingleVideo() {
         }
       );
     } catch (error) {
-      error.response.status === 500 && errorToast("Something went wrong while adding video to history!");
+      error.response.status === 500 &&
+        errorToast("Something went wrong while adding video to history!");
     }
   };
-
-  
-
-  // const dummyplaylist = [
-  //   { _id: "uuid1", videos: [{ video1: singleVideo }] },
-  //   { _id: "uuid2", videos: [{ video1: singleVideo }] },
-  // ];
-
-  // console.log(dummyplaylist);
 
   useEffect(
     () =>
@@ -146,16 +141,77 @@ function SingleVideo() {
     [watchLater, _id]
   );
 
-  // const Something = useCallback(addToHistory, [token]);
-  // useEffect(() => {
-  //   isAuthenticated && setTimeout(() => Something());
-  // }, [isAuthenticated, singleVideo, Something]);
-
-  // const Something = useCallback(addToHistory, [token]);
-  
   useEffect(() => {
-    isAuthenticated && setTimeout(()=>addToHistory(singleVideo),0);
+    isAuthenticated && setTimeout(() => addToHistory(singleVideo), 0);
   });
+
+  const modalShowHandler = () => {
+    const modal = document.getElementById("modal");
+    if (modal.style.display === "none") {
+      modal.style.display = "block";
+    } else {
+      modal.style.display = "none";
+    }
+  };
+
+  const createPlaylistHandler = async (video) => {
+    try {
+      const res = await axios.post(
+        `/api/user/playlists`,
+        {
+          playlist: [
+            {
+              name: playListNameInput,
+              videos: (prev) => [...prev, video],
+            },
+          ],
+        },
+        {
+          headers: { authorization: token },
+        }
+      );
+      setPlaylist(res.data.playlists);
+      setPlayListNameInput("");
+      successToast("Playlist created")
+    } catch (error) {
+      error.response.status === 500 &&
+      errorToast("Something went wrong while creating playlist!");
+    }
+  };
+
+  const getPlaylists = async () => {
+    try {
+      const res = await axios.get(`/api/user/playlists`, {
+        headers: { authorization: token },
+      });
+      setPlaylist(res.data.playlists)
+    } catch (error) {
+      error.response.status === 500 &&
+      errorToast("Something went wrong!");
+    }
+  };
+  const addVideoToPlaylist = async (video, item) => {
+    try {
+       await axios.post(
+        `/api/user/playlists/${item._id}`,
+        {
+          video,
+        },
+        {
+          headers: { authorization: token },
+        }
+      );
+      
+      successToast(`Video added to ${item[0].name}`)
+    } catch (error) {
+      error.response.status === 409 ?
+      errorToast(`Video already exist in ${item[0].name}`):
+      errorToast("SOmething went wrong when added video to playlist")
+    }
+    getPlaylists()
+  };
+
+
 
   return (
     <>
@@ -206,14 +262,45 @@ function SingleVideo() {
                 </span>
                 {videoIsLiked ? "Liked" : "Like"}
               </button>
-              <button
-                className="bold m-1 mx-2 flex-center-center"
-              >
+              <button className="bold m-1 mx-2 flex-center-center" onClick={modalShowHandler}>
                 <span className={`material-icons icon-s3 mx-1`}>
                   playlist_add
                 </span>
                 Add to playlist
               </button>
+              <div
+                id="modal"
+                className="center-div-method-2 h-50rem w-50rem p-3"
+              >
+                <div className="flex-space_between-center">
+                  <h3>Save to...</h3>
+                  <button className="m-2" onClick={modalShowHandler}>
+                    X
+                  </button>
+                </div>
+                <hr />
+                {playlist.map((item,index) => (
+                  <div className="flex-col my-1" key={index}>
+                    <label className="flex">
+                      <button onClick={() =>addVideoToPlaylist(singleVideo,item)}>
+                        <span className="material-icons icon-s3">add</span>
+                      </button>
+                      {item[0].name}
+                    </label>
+                  </div>
+                ))}
+                <label>
+                  <input
+                    type={"text"}
+                    value={playListNameInput}
+                    onChange={(e) => setPlayListNameInput(e.target.value)}
+                  />
+                  <button onClick={() => createPlaylistHandler(singleVideo)}>
+                    Create playlist
+                  </button>
+                </label>
+                <button onClick={getPlaylists} className="mx-2">get playlist</button>
+              </div>
               <button
                 className="bold m-1 mx-2 flex-center-center"
                 onClick={() => watchLaterHandler(singleVideo)}

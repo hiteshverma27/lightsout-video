@@ -5,4 +5,3 @@ export { VideoCard } from "./VideoCard/VideoCard";
 export { SideBar } from "./SideBar/SideBar";
 export { LikedVideoCard } from "./LikedVideoCard/LikedVideoCard";
 export { successToast, errorToast } from "./Toast/Toast"
-export { Modal } from "./Modal/Modal"

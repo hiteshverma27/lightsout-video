@@ -2,6 +2,7 @@ import MockmanEs from "mockman-js";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./App.css";
+import { useVideo } from "./contexts";
 import {
   History,
   Home,
@@ -9,6 +10,7 @@ import {
   Login,
   NotFound,
   PlayList,
+  PlayListContainer,
   Signup,
   SingleVideo,
   VideoListing,
@@ -17,6 +19,7 @@ import {
 import { Profile } from "./pages/Profile/Profile";
 
 function App() {
+  const {playlistId} = useVideo()
   return (
     <>
       <Routes>
@@ -26,6 +29,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/explore" element={<VideoListing />} />
         <Route path="/playlist" element={<PlayList />} />
+        <Route path="/playlist/:id" element={<PlayListContainer playlistId={playlistId}/>} />
         <Route path="/liked-videos" element={<LikedVideos />} />
         <Route path="/video/:videoId" element={<SingleVideo />} />
         <Route path="/watch-later" element={<WatchLater />} />

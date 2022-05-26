@@ -47,7 +47,7 @@ function WatchLater() {
           </div>
           <hr />
           <div className="h-90per w-80vw p-1 liked-video-container">
-            {!watchLater.length===0?watchLater.map(
+            {watchLater.map(
               ({
                 _id,
                 title,
@@ -86,7 +86,7 @@ function WatchLater() {
                   </button>
                 </div>
               )
-            ):<h2>No videos in this playlist yet. <Link to={"/explore"}>Explore</Link></h2>}
+            )}
           </div>
         </div>
       </div>
