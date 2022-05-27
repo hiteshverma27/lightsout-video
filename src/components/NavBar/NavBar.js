@@ -1,30 +1,13 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import axios from "axios";
 import { useAuth } from "../../contexts";
-import { errorToast, successToast } from "../Toast/Toast";
+import { guestModeHandler } from "../../services";
 
 function NavBar() {
   const { isAuthenticated, userData } = useAuth();
   const currentLocation = useLocation();
   const { setIsAuthenticated, setToken, setUserData } = useAuth();
 
-  const guestModeHandler = async (e) => {
-    e.preventDefault();
-    try {
-      const userData = await axios.post("/api/auth/login", {
-        email: "adarshbalika@gmail.com",
-        password: "adarshBalika123",
-      });
-      setToken(userData.data.encodedToken);
-      setIsAuthenticated(true);
-      setUserData(userData.data.foundUser);
-      setIsAuthenticated(true);
-      successToast(`Welcome back ${userData.data.foundUser.firstName}!`);
-    } catch (error) {
-      errorToast("You are not registered, please sign up");
-    }
-  };
   return (
     <nav className="flex-space_between-center w-100per px-2 bg-white p-2 navbar">
       <Link to={"/"}>
@@ -35,12 +18,13 @@ function NavBar() {
       </Link>
 
       <ul className="flex-space_between-center navbar">
-        {/* <li><Link to={"/mock"} className="btn-primary-confirm">MockMan</Link></li> */}
         {isAuthenticated || (
           <li className="mx-2 flex-center-center navbar">
             <button
               className="btn-primary-confirm"
-              onClick={(e) => guestModeHandler(e)}
+              onClick={(e) =>
+                guestModeHandler(e, setToken, setUserData, setIsAuthenticated)
+              }
             >
               One Tap login
             </button>

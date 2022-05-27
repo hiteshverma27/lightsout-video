@@ -64,8 +64,8 @@ function Signup() {
     e.preventDefault();
     try {
       const userData = await axios.post("/api/auth/login", {
-        email: "adarshbalika@gmail.com",
-        password: "adarshBalika123",
+        email: "hiteshverma@gmail.com",
+        password: "hitesh123",
       });
       setToken(userData.data.encodedToken);
       setIsAuthenticated(true);

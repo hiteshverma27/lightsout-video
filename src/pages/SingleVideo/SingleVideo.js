@@ -172,10 +172,10 @@ function SingleVideo() {
       );
       setPlaylist(res.data.playlists);
       setPlayListNameInput("");
-      successToast("Playlist created")
+      successToast("Playlist created");
     } catch (error) {
       error.response.status === 500 &&
-      errorToast("Something went wrong while creating playlist!");
+        errorToast("Something went wrong while creating playlist!");
     }
   };
 
@@ -184,15 +184,14 @@ function SingleVideo() {
       const res = await axios.get(`/api/user/playlists`, {
         headers: { authorization: token },
       });
-      setPlaylist(res.data.playlists)
+      setPlaylist(res.data.playlists);
     } catch (error) {
-      error.response.status === 500 &&
-      errorToast("Something went wrong!");
+      error.response.status === 500 && errorToast("Something went wrong!");
     }
   };
   const addVideoToPlaylist = async (video, item) => {
     try {
-       await axios.post(
+      await axios.post(
         `/api/user/playlists/${item._id}`,
         {
           video,
@@ -201,17 +200,15 @@ function SingleVideo() {
           headers: { authorization: token },
         }
       );
-      
-      successToast(`Video added to ${item[0].name}`)
+
+      successToast(`Video added to ${item[0].name}`);
     } catch (error) {
-      error.response.status === 409 ?
-      errorToast(`Video already exist in ${item[0].name}`):
-      errorToast("SOmething went wrong when added video to playlist")
+      error.response.status === 409
+        ? errorToast(`Video already exist in ${item[0].name}`)
+        : errorToast("SOmething went wrong when added video to playlist");
     }
-    getPlaylists()
+    getPlaylists();
   };
-
-
 
   return (
     <>
@@ -262,7 +259,10 @@ function SingleVideo() {
                 </span>
                 {videoIsLiked ? "Liked" : "Like"}
               </button>
-              <button className="bold m-1 mx-2 flex-center-center" onClick={modalShowHandler}>
+              <button
+                className="bold m-1 mx-2 flex-center-center"
+                onClick={modalShowHandler}
+              >
                 <span className={`material-icons icon-s3 mx-1`}>
                   playlist_add
                 </span>
@@ -279,10 +279,12 @@ function SingleVideo() {
                   </button>
                 </div>
                 <hr />
-                {playlist.map((item,index) => (
+                {playlist.map((item, index) => (
                   <div className="flex-col my-1" key={index}>
                     <label className="flex">
-                      <button onClick={() =>addVideoToPlaylist(singleVideo,item)}>
+                      <button
+                        onClick={() => addVideoToPlaylist(singleVideo, item)}
+                      >
                         <span className="material-icons icon-s3">add</span>
                       </button>
                       {item[0].name}
@@ -299,7 +301,6 @@ function SingleVideo() {
                     Create playlist
                   </button>
                 </label>
-                <button onClick={getPlaylists} className="mx-2">get playlist</button>
               </div>
               <button
                 className="bold m-1 mx-2 flex-center-center"
