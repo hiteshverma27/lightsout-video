@@ -4,6 +4,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-content: flex-start;
+    overflow-y: scroll;
 }
 .playlist{
     min-width: 40%;

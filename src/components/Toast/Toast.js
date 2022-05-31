@@ -4,11 +4,11 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const successToast = (msg) => {
   toast.success(msg, {
-    position: "bottom-right",
+    position: "top-right",
     autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
-    pauseOnHover: true,
+    pauseOnHover: false,
     draggable: true,
     progress: undefined,
   });
@@ -16,11 +16,11 @@ const successToast = (msg) => {
 
 const errorToast = (msg) => {
     toast.error(msg, {
-      position: "bottom-right",
+      position: "top-right",
       autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
-      pauseOnHover: true,
+      pauseOnHover: false,
       draggable: true,
       progress: undefined,
     });

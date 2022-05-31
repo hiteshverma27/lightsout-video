@@ -1,10 +1,12 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../contexts";
+import { guestModeHandler } from "../../services";
 
 function NavBar() {
   const { isAuthenticated, userData } = useAuth();
   const currentLocation = useLocation();
+  const { setIsAuthenticated, setToken, setUserData } = useAuth();
 
   return (
     <nav className="flex-space_between-center w-100per px-2 bg-white p-2 navbar">
@@ -16,6 +18,18 @@ function NavBar() {
       </Link>
 
       <ul className="flex-space_between-center navbar">
+        {isAuthenticated || (
+          <li className="mx-2 flex-center-center navbar">
+            <button
+              className="btn-primary-confirm"
+              onClick={(e) =>
+                guestModeHandler(e, setToken, setUserData, setIsAuthenticated)
+              }
+            >
+              One Tap login
+            </button>
+          </li>
+        )}
         {isAuthenticated ? (
           <li className="mx-2 flex-center-center navbar">
             <Link to={"/profile"} className="flex">

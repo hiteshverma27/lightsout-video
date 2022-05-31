@@ -1,7 +1,39 @@
 import React from "react";
-import { Footer, LikedVideoCard, NavBar, SideBar } from "../../components";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  errorToast,
+  Footer,
+  LikedVideoCard,
+  NavBar,
+  SideBar,
+  successToast,
+} from "../../components";
+import { useAuth, useVideo } from "../../contexts";
+import axios from "axios"
 
 function WatchLater() {
+  const navigate = useNavigate();
+  const { watchLater, setSingleVideo, videos, setWatchLater } = useVideo();
+  const { isAuthenticated, token } = useAuth();
+
+  const deleteFromWatchLaterHandler = (_id) => {
+    const deleteFromWatchLater = async (_id) => {
+      try {
+        const watchLater = await axios.delete(`/api/user/watchlater/${_id}`, {
+          headers: { authorization: token },
+        });
+        setWatchLater(watchLater.data.watchlater);
+        successToast("Video deleted from watch later!");
+      } catch (error) {
+        error.response.status === 409
+          ? successToast("Video already exist in watch later!")
+          : errorToast(
+              "Something went wrong while adding video to watch later!"
+            );
+      }
+    };
+    isAuthenticated ? deleteFromWatchLater(_id) : navigate("/login");
+  };
   return (
     <>
       <NavBar />
@@ -15,10 +47,46 @@ function WatchLater() {
           </div>
           <hr />
           <div className="h-90per w-80vw p-1 liked-video-container">
-            <LikedVideoCard />
-            <LikedVideoCard />
-            <LikedVideoCard />
-            <LikedVideoCard />
+            {watchLater.map(
+              ({
+                _id,
+                title,
+                creator,
+                thumbnail,
+                views,
+                avatar,
+                duration,
+                description,
+              }) => (
+                <div
+                  key={_id}
+                  onClick={async () =>
+                    await setSingleVideo(
+                      videos.filter((item) => item._id === _id)[0]
+                    )
+                  }
+                  className="likeVideoCardContainer"
+                >
+                  <Link to={`/video/${_id}`}>
+                    <LikedVideoCard
+                      title={title}
+                      creator={creator}
+                      thumbnail={thumbnail}
+                      views={views}
+                      avatar={avatar}
+                      duration={duration}
+                      description={description}
+                    />
+                  </Link>
+                  <button
+                    className="remove-btn m-2"
+                    onClick={() => deleteFromWatchLaterHandler(_id)}
+                  >
+                    <span className="material-icons icon-s3 p-1">delete</span>
+                  </button>
+                </div>
+              )
+            )}
           </div>
         </div>
       </div>
