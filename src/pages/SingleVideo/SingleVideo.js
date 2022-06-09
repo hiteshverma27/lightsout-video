@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   errorToast,
   Footer,
+  Modal,
   NavBar,
   SideBar,
   successToast,
@@ -145,16 +146,8 @@ function SingleVideo() {
     isAuthenticated && setTimeout(() => addToHistory(singleVideo), 0);
   });
 
-  const modalShowHandler = () => {
-    const modal = document.getElementById("modal");
-    if (modal.style.display === "none") {
-      modal.style.display = "block";
-    } else {
-      modal.style.display = "none";
-    }
-  };
-
-  const createPlaylistHandler = async (video) => {
+  const createPlaylistHandler = async (video, e) => {
+    e.preventDefault();
     try {
       const res = await axios.post(
         `/api/user/playlists`,
@@ -210,6 +203,12 @@ function SingleVideo() {
     getPlaylists();
   };
 
+  const modalRef = useRef();
+
+  const openModal = () => {
+    modalRef.current.openModal();
+  };
+
   return (
     <>
       <NavBar />
@@ -260,21 +259,23 @@ function SingleVideo() {
                 {videoIsLiked ? "Liked" : "Like"}
               </button>
               <button
+                onClick={() =>
+                  isAuthenticated ? openModal() : navigate("/login")
+                }
                 className="bold m-1 mx-2 flex-center-center"
-                onClick={modalShowHandler}
               >
                 <span className={`material-icons icon-s3 mx-1`}>
                   playlist_add
                 </span>
                 Add to playlist
               </button>
-              <div
-                id="modal"
-                className="center-div-method-2 h-50rem w-50rem p-3"
-              >
+              <Modal ref={modalRef}>
                 <div className="flex-space_between-center">
                   <h3>Save to...</h3>
-                  <button className="m-2" onClick={modalShowHandler}>
+                  <button
+                    className="m-2"
+                    onClick={() => modalRef.current.close()}
+                  >
                     X
                   </button>
                 </div>
@@ -291,17 +292,23 @@ function SingleVideo() {
                     </label>
                   </div>
                 ))}
-                <label>
-                  <input
-                    type={"text"}
-                    value={playListNameInput}
-                    onChange={(e) => setPlayListNameInput(e.target.value)}
-                  />
-                  <button onClick={() => createPlaylistHandler(singleVideo)}>
+                <form>
+                  <label>
+                    <input
+                      type={"text"}
+                      value={playListNameInput}
+                      onChange={(e) => setPlayListNameInput(e.target.value)}
+                    />
+                  </label>
+                  <button
+                    type="submit"
+                    disabled={!Boolean(playListNameInput)}
+                    onClick={(e) => createPlaylistHandler(singleVideo, e)}
+                  >
                     Create playlist
                   </button>
-                </label>
-              </div>
+                </form>
+              </Modal>
               <button
                 className="bold m-1 mx-2 flex-center-center"
                 onClick={() => watchLaterHandler(singleVideo)}
