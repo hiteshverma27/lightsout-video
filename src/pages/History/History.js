@@ -31,7 +31,7 @@ function History() {
       }
     };
     isAuthenticated ? getHistory() : navigate("/login");
-  }, [isAuthenticated,navigate,setHistory,token]);
+  }, [isAuthenticated, navigate, setHistory, token]);
 
   const deleteFromHistory = (_id) => {
     const deleteVideoFromHsitory = async (_id) => {
@@ -84,6 +84,14 @@ function History() {
           </div>
           <hr />
           <div className="h-90per w-80vw p-1 liked-video-container">
+            {history.length === 0 && (
+              <h3>
+                No videos to show...
+                <Link to={"/explore"} className="btn-primary-confirm m-1">
+                  Explore videos
+                </Link>
+              </h3>
+            )}
             {history.map(
               ({
                 _id,

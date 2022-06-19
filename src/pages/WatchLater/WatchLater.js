@@ -9,7 +9,7 @@ import {
   successToast,
 } from "../../components";
 import { useAuth, useVideo } from "../../contexts";
-import axios from "axios"
+import axios from "axios";
 
 function WatchLater() {
   const navigate = useNavigate();
@@ -47,6 +47,14 @@ function WatchLater() {
           </div>
           <hr />
           <div className="h-90per w-80vw p-1 liked-video-container">
+            {watchLater.length === 0 && (
+              <h3>
+                No videos to show...
+                <Link to={"/explore"} className="btn-primary-confirm m-1">
+                  Explore videos
+                </Link>
+              </h3>
+            )}
             {watchLater.map(
               ({
                 _id,

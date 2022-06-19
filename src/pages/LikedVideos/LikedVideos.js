@@ -40,6 +40,9 @@ function LikedVideos() {
           </div>
           <hr />
           <div className="h-90per w-80vw p-1 liked-video-container">
+          {likedVideos.length === 0 && (
+              <h3>No videos to show...<Link to={"/explore"} className="btn-primary-confirm m-1">Explore videos</Link></h3>
+            )}
             {likedVideos.map(
               ({
                 _id,

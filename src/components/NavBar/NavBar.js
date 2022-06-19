@@ -33,9 +33,6 @@ function NavBar() {
         {isAuthenticated ? (
           <li className="mx-2 flex-center-center navbar">
             <Link to={"/profile"} className="flex">
-              <span className="material-icons icon-s3 navbar mx-1">
-                account_circle
-              </span>{" "}
               <h4 className="navbar">{`Hi ${userData.firstName}`}</h4>
             </Link>
           </li>

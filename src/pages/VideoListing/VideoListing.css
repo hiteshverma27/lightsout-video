@@ -12,11 +12,13 @@
     align-items: center;
     overflow-x: scroll;
     width: max-content;
-    height: 8rem
+    height: 8rem;
+    
 }
 .chips-container::-webkit-scrollbar{
     display: none;
 }
 .chip-active{
+    box-shadow: 3px 4px 15px -4px rgba(0,0,0,0.75);
     background-color: lightgray;
 }

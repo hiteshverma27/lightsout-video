@@ -1,0 +1,6 @@
+.footer-nav-links{
+    color: rgb(211, 211, 211)    ;
+}
+.footer-nav-links:hover{
+    color: var(--accent-color);
+}

@@ -6,6 +6,12 @@
     backdrop-filter: blur(5px);
     
 }
+.profile-avatar{
+    height: 10rem;
+    width: 10rem;
+    border-radius: 50%;
+    padding: 1rem;
+}
 
 @media screen and (max-width: 425px){
     .login-div{

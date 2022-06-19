@@ -1,10 +1,9 @@
 import { v4 as uuid } from "uuid";
 
-
 export const accountLinks = [
-  { _id:uuid() ,title: "My Account" },
-  { _id:uuid() ,title: "Wishlist" },
-  { _id:uuid() ,title: "Track Order" },
-  { _id:uuid() ,title: "View Cart" },
-  { _id:uuid() ,title: "Privacy Policy" },
+  { _id: uuid(), title: "Liked Videos", route: "/liked-videos" },
+  { _id: uuid(), title: "Watch Later", route: "/watch-later" },
+  { _id: uuid(), title: "Playlists", route: "/playlist" },
+  { _id: uuid(), title: "History", route: "/history" },
+  { _id: uuid(), title: "My Account", route: "/profile" },
 ];

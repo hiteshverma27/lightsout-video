@@ -5,7 +5,7 @@ import { useVideo } from "../../contexts";
 import "./PlayList.css";
 
 function PlayList() {
-  const {playlist, setPlaylistId} = useVideo()
+  const { playlist, setPlaylistId } = useVideo();
   return (
     <>
       <NavBar />
@@ -19,40 +19,31 @@ function PlayList() {
           </div>
           <hr />
           <div className="h-90per w-80vw p-2 mb-1 playlist-container">
-            <div
-              className="test-border flex-space_between-center playlist h-10rem m-3"
-            >
-              <h3 className="m-2">Liked Videos</h3>
-              <Link to={"/liked-videos"}>
-                <span className="material-icons m-2 cursor-pointer">
-                  open_in_new
-                </span>
-              </Link>
-            </div>
-            <div
-              className="test-border flex-space_between-center playlist h-10rem m-3"
-            >
-              <h3 className="m-2">Watch Later</h3>
-              <Link to={"/watch-later"}>
-                <span className="material-icons m-2 cursor-pointer">
-                  open_in_new
-                </span>
-              </Link>
-            </div>
+            {playlist.length === 0 && (
+              <h3>
+                No PlayLists to show...
+                <Link to={"/explore"} className="btn-primary-confirm m-1">
+                  Explore videos
+                </Link>
+              </h3>
+            )}
             {playlist.map((item) => {
               return (
-                <Link onClick={()=>setPlaylistId(item._id)} to={`/playlist/${item._id}`}
-                key={item._id}>
-                <div
-                  className="test-border flex-space_between-center playlist h-10rem m-3"
+                <Link
+                  onClick={() => setPlaylistId(item._id)}
+                  to={`/playlist/${item._id}`}
                   key={item._id}
                 >
-                  <h3 className="m-2">{item[0].name} </h3>
+                  <div
+                    className="test-border flex-space_between-center playlist h-10rem m-3 w-30rem"
+                    key={item._id}
+                  >
+                    <h3 className="m-2">{item[0].name} </h3>
                     <span className="material-icons m-2 cursor-pointer">
                       open_in_new
                     </span>
-                </div>
-                  </Link>
+                  </div>
+                </Link>
               );
             })}
           </div>

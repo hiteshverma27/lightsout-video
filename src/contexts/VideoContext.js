@@ -12,6 +12,8 @@ const VideoProvider = ({ children }) => {
   const [history, setHistory] = useState([]);
   const [playlist, setPlaylist] = useState([]);
   const [playlistId, setPlaylistId] = useState("");
+  const [categoriesToFilter, setCategoriesToFilter] = useState([]);
+
   useEffect(() => {
     (async () => {
       try {
@@ -41,6 +43,8 @@ const VideoProvider = ({ children }) => {
         setPlaylist,
         playlistId,
         setPlaylistId,
+        categoriesToFilter,
+        setCategoriesToFilter,
       }}
     >
       {children}

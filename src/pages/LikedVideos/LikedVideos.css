@@ -8,6 +8,7 @@
 .liked-video-container{
     display: flex;
     justify-content: center;
+    align-content: baseline;
     overflow-x: scroll;
     flex-wrap: wrap;
 }

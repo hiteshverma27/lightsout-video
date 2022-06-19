@@ -296,12 +296,15 @@ function SingleVideo() {
                   <label>
                     <input
                       type={"text"}
+                      className="my-1 px-1"
                       value={playListNameInput}
+                      placeholder="Playlist name"
                       onChange={(e) => setPlayListNameInput(e.target.value)}
                     />
                   </label>
                   <button
                     type="submit"
+                    className={`btn-${!Boolean(playListNameInput)?"secondary":"primary"}-confirm my-1`}
                     disabled={!Boolean(playListNameInput)}
                     onClick={(e) => createPlaylistHandler(singleVideo, e)}
                   >
